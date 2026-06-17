@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import type { Todo, Project } from '@/types';
 import TodoItem from '@/components/TodoItem';
-import { ClipboardList } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 type TodoListProps = {
   todos: Todo[];
@@ -24,19 +24,21 @@ export default function TodoList(props: TodoListProps) {
   if (todos.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
-        <div className="w-16 h-16 rounded-full bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center mb-4">
-          <ClipboardList className="w-8 h-8 text-indigo-500" />
+        <div className="w-20 h-20 rounded-3xl bg-[#ffd84d] border-2 border-[#1a1530] shadow-[4px_4px_0_0_#1a1530] flex items-center justify-center mb-4 rotate-[-6deg]">
+          <Sparkles className="w-9 h-9 text-[#1a1530]" />
         </div>
-        <p className="text-slate-600 dark:text-slate-300 font-medium">No tasks here</p>
-        <p className="text-slate-400 dark:text-slate-500 text-sm mt-1">
-          Try adjusting filters or add a new task.
+        <p className="text-[#1a1530] dark:text-[#f1ecff] font-black text-lg" style={{ fontFamily: 'Fraunces, serif' }}>
+          You're all clear!
+        </p>
+        <p className="text-[#1a1530]/60 dark:text-[#f1ecff]/60 text-sm font-medium mt-1">
+          Add a tiny next step and get unstuck.
         </p>
       </div>
     );
   }
 
   return (
-    <ul className="flex flex-col gap-2">
+    <ul className="flex flex-col gap-3">
       {todos.map((t) => (
         <TodoItem
           key={t.id}

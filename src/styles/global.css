@@ -3,8 +3,14 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-brand: #6366f1;
-  --color-brand-dark: #4f46e5;
+  --color-brand: #6e56ff;
+  --color-brand-dark: #4f3dd9;
+  --color-unstuck-bg: #faf7f2;
+  --color-unstuck-ink: #1a1530;
+  --color-unstuck-accent: #ffd84d;
+  --color-unstuck-coral: #ff7a59;
+  --color-unstuck-mint: #b8e6c1;
+  --color-unstuck-lavender: #c9b8ff;
 }
 
 html, body, #root {
@@ -12,14 +18,24 @@ html, body, #root {
 }
 
 body {
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 50%, #fdf2f8 100%);
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background-color: #faf7f2;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(255, 216, 77, 0.35) 0%, transparent 38%),
+    radial-gradient(circle at 88% 14%, rgba(201, 184, 255, 0.4) 0%, transparent 42%),
+    radial-gradient(circle at 78% 86%, rgba(255, 122, 89, 0.28) 0%, transparent 45%),
+    radial-gradient(circle at 18% 92%, rgba(184, 230, 193, 0.4) 0%, transparent 45%);
   background-attachment: fixed;
-  color: #0f172a;
+  color: #1a1530;
 }
 
 html.dark body {
-  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #2e1065 100%);
+  background-color: #14111f;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(255, 216, 77, 0.18) 0%, transparent 40%),
+    radial-gradient(circle at 88% 14%, rgba(201, 184, 255, 0.22) 0%, transparent 45%),
+    radial-gradient(circle at 78% 86%, rgba(255, 122, 89, 0.18) 0%, transparent 45%),
+    radial-gradient(circle at 18% 92%, rgba(184, 230, 193, 0.18) 0%, transparent 45%);
   background-attachment: fixed;
-  color: #e2e8f0;
+  color: #f1ecff;
 }

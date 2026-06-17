@@ -15,7 +15,7 @@ type SidebarProps = {
   counts: Record<string, number>;
 };
 
-const COLORS: string[] = ['#6366f1', '#ec4899', '#0ea5e9', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
+const COLORS: string[] = ['#6e56ff', '#ff7a59', '#ffd84d', '#b8e6c1', '#c9b8ff', '#ef4444', '#0ea5e9'];
 
 export default function Sidebar({
   projects,
@@ -41,27 +41,27 @@ export default function Sidebar({
   };
 
   return (
-    <aside className="w-full lg:w-60 lg:flex-shrink-0 space-y-5">
-      <div>
-        <div className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 px-2">
+    <aside className="w-full lg:w-64 lg:flex-shrink-0 space-y-6">
+      <div className="bg-white dark:bg-[#1f1a35] border-2 border-[#1a1530] dark:border-[#f1ecff]/20 rounded-2xl shadow-[5px_5px_0_0_#ff7a59] dark:shadow-[5px_5px_0_0_#c9b8ff] p-4">
+        <div className="text-xs font-black uppercase tracking-widest text-[#1a1530] dark:text-[#f1ecff] mb-3 px-1">
           Projects
         </div>
-        <ul className="space-y-0.5">
+        <ul className="space-y-1">
           <li>
             <button
               onClick={() => onSelectProject('all')}
               className={clsx(
-                'w-full flex items-center justify-between gap-2 px-2 py-1.5 rounded-lg text-sm',
+                'w-full flex items-center justify-between gap-2 px-2.5 py-2 rounded-xl text-sm font-semibold transition-all',
                 activeProjectId === 'all'
-                  ? 'bg-indigo-600 text-white'
-                  : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800',
+                  ? 'bg-[#1a1530] text-[#ffd84d] dark:bg-[#ffd84d] dark:text-[#1a1530]'
+                  : 'text-[#1a1530] dark:text-[#f1ecff] hover:bg-[#ffd84d]/30 dark:hover:bg-[#ffd84d]/10',
               )}
             >
               <span className="flex items-center gap-2">
                 <Inbox className="w-4 h-4" />
-                All tasks
+                Everything
               </span>
-              <span className="text-xs opacity-75">{counts['all'] ?? 0}</span>
+              <span className="text-xs font-bold opacity-75">{counts['all'] ?? 0}</span>
             </button>
           </li>
           {projects.map((p) => (
@@ -69,22 +69,22 @@ export default function Sidebar({
               <button
                 onClick={() => onSelectProject(p.id)}
                 className={clsx(
-                  'w-full flex items-center justify-between gap-2 px-2 py-1.5 rounded-lg text-sm',
+                  'w-full flex items-center justify-between gap-2 px-2.5 py-2 rounded-xl text-sm font-semibold transition-all',
                   activeProjectId === p.id
-                    ? 'bg-indigo-600 text-white'
-                    : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800',
+                    ? 'bg-[#1a1530] text-[#ffd84d] dark:bg-[#ffd84d] dark:text-[#1a1530]'
+                    : 'text-[#1a1530] dark:text-[#f1ecff] hover:bg-[#ffd84d]/30 dark:hover:bg-[#ffd84d]/10',
                 )}
               >
                 <span className="flex items-center gap-2 min-w-0">
-                  <Folder className="w-4 h-4" style={{ color: p.color }} />
+                  <Folder className="w-4 h-4" style={{ color: p.color }} fill={p.color} />
                   <span className="truncate">{p.name}</span>
                 </span>
-                <span className="text-xs opacity-75">{counts[p.id] ?? 0}</span>
+                <span className="text-xs font-bold opacity-75">{counts[p.id] ?? 0}</span>
               </button>
               {p.id !== 'inbox' && (
                 <button
                   onClick={() => onRemoveProject(p.id)}
-                  className="absolute right-1 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 p-1 text-slate-400 hover:text-rose-600 bg-white dark:bg-slate-900 rounded"
+                  className="absolute right-1 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 p-1 text-[#1a1530]/60 hover:text-[#ff7a59] bg-white dark:bg-[#1f1a35] rounded"
                   aria-label="Delete project"
                 >
                   <X className="w-3 h-3" />
@@ -95,23 +95,23 @@ export default function Sidebar({
         </ul>
 
         {adding ? (
-          <form onSubmit={submit} className="mt-2 p-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/60 space-y-2">
+          <form onSubmit={submit} className="mt-3 p-3 rounded-xl border-2 border-[#1a1530] dark:border-[#f1ecff]/20 bg-[#faf7f2] dark:bg-[#14111f] space-y-2">
             <input
               autoFocus
               value={name}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
               placeholder="Project name"
-              className="w-full px-2 py-1 text-sm rounded border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100"
+              className="w-full px-2.5 py-1.5 text-sm rounded-lg border-2 border-[#1a1530] dark:border-[#f1ecff]/20 bg-white dark:bg-[#1f1a35] text-[#1a1530] dark:text-[#f1ecff] font-medium focus:outline-none focus:ring-2 focus:ring-[#ffd84d]"
             />
-            <div className="flex gap-1">
+            <div className="flex gap-1 flex-wrap">
               {COLORS.map((c) => (
                 <button
                   key={c}
                   type="button"
                   onClick={() => setColor(c)}
                   className={clsx(
-                    'w-5 h-5 rounded-full border-2',
-                    color === c ? 'border-slate-800 dark:border-white' : 'border-transparent',
+                    'w-6 h-6 rounded-full border-2 transition-transform',
+                    color === c ? 'border-[#1a1530] dark:border-white scale-110' : 'border-transparent',
                   )}
                   style={{ backgroundColor: c }}
                   aria-label={`Color ${c}`}
@@ -121,14 +121,14 @@ export default function Sidebar({
             <div className="flex gap-1">
               <button
                 type="submit"
-                className="flex-1 px-2 py-1 rounded bg-indigo-600 text-white text-xs font-medium"
+                className="flex-1 px-2 py-1.5 rounded-lg bg-[#1a1530] text-[#ffd84d] text-xs font-black uppercase tracking-wider"
               >
                 Add
               </button>
               <button
                 type="button"
                 onClick={() => setAdding(false)}
-                className="px-2 py-1 rounded border border-slate-200 dark:border-slate-700 text-xs text-slate-600 dark:text-slate-300"
+                className="px-2 py-1.5 rounded-lg border-2 border-[#1a1530] dark:border-[#f1ecff]/20 text-xs font-bold text-[#1a1530] dark:text-[#f1ecff]"
               >
                 Cancel
               </button>
@@ -137,7 +137,7 @@ export default function Sidebar({
         ) : (
           <button
             onClick={() => setAdding(true)}
-            className="mt-2 w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-sm text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-slate-800"
+            className="mt-3 w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-sm font-semibold text-[#1a1530]/70 dark:text-[#f1ecff]/70 hover:text-[#6e56ff] dark:hover:text-[#c9b8ff] hover:bg-[#c9b8ff]/20 border-2 border-dashed border-[#1a1530]/20 dark:border-[#f1ecff]/20 hover:border-[#6e56ff] transition-all"
           >
             <Plus className="w-4 h-4" />
             New project
@@ -146,15 +146,15 @@ export default function Sidebar({
       </div>
 
       {allTags.length > 0 && (
-        <div>
-          <div className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 px-2">
+        <div className="bg-white dark:bg-[#1f1a35] border-2 border-[#1a1530] dark:border-[#f1ecff]/20 rounded-2xl shadow-[5px_5px_0_0_#b8e6c1] dark:shadow-[5px_5px_0_0_#6e56ff] p-4">
+          <div className="text-xs font-black uppercase tracking-widest text-[#1a1530] dark:text-[#f1ecff] mb-3 px-1">
             Tags
           </div>
-          <div className="flex flex-wrap gap-1 px-2">
+          <div className="flex flex-wrap gap-1.5">
             {activeTag && (
               <button
                 onClick={() => onSelectTag(null)}
-                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300"
+                className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-bold bg-[#ff7a59] text-white"
               >
                 <X className="w-3 h-3" />
                 Clear
@@ -165,10 +165,10 @@ export default function Sidebar({
                 key={tag}
                 onClick={() => onSelectTag(activeTag === tag ? null : tag)}
                 className={clsx(
-                  'inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs border transition-colors',
+                  'inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-bold border-2 transition-all',
                   activeTag === tag
-                    ? 'bg-indigo-600 text-white border-indigo-600'
-                    : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700',
+                    ? 'bg-[#1a1530] text-[#ffd84d] border-[#1a1530]'
+                    : 'bg-[#faf7f2] dark:bg-[#14111f] border-[#1a1530] dark:border-[#f1ecff]/20 text-[#1a1530] dark:text-[#f1ecff] hover:bg-[#ffd84d]/40',
                 )}
               >
                 <Hash className="w-3 h-3" />

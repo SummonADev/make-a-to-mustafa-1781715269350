@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { CheckCircle2, Moon, Sun } from 'lucide-react';
+import { Sparkles, Moon, Sun, Zap } from 'lucide-react';
 import TodoInput from '@/components/TodoInput';
 import TodoList from '@/components/TodoList';
 import FilterBar from '@/components/FilterBar';
@@ -45,29 +45,29 @@ export default function HomePage() {
 
   const activeProjectName =
     prefs.activeProjectId === 'all'
-      ? 'All tasks'
+      ? 'Everything'
       : projects.find((p) => p.id === prefs.activeProjectId)?.name ?? 'Tasks';
 
   return (
     <div className="min-h-screen w-full px-4 py-8 sm:py-12">
       <div className="max-w-6xl mx-auto">
-        <header className="flex items-center justify-between mb-8">
+        <header className="flex items-center justify-between mb-10">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 flex items-center justify-center shadow-lg">
-              <CheckCircle2 className="w-6 h-6 text-white" />
+            <div className="relative w-14 h-14 rounded-2xl bg-[#1a1530] dark:bg-[#ffd84d] flex items-center justify-center shadow-[6px_6px_0_0_#ffd84d] dark:shadow-[6px_6px_0_0_#ff7a59] rotate-[-4deg]">
+              <Zap className="w-7 h-7 text-[#ffd84d] dark:text-[#1a1530] fill-current" />
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-slate-100">
-                Tasks
+              <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-[#1a1530] dark:text-[#f1ecff]" style={{ fontFamily: 'Fraunces, serif' }}>
+                unstuck<span className="text-[#ff7a59]">.</span>
               </h1>
-              <p className="text-sm text-slate-500 dark:text-slate-400">
-                Organize. Prioritize. Get things done.
+              <p className="text-sm font-medium text-[#1a1530]/60 dark:text-[#f1ecff]/60">
+                Stop overthinking. Start doing.
               </p>
             </div>
           </div>
           <button
             onClick={toggleTheme}
-            className="p-2.5 rounded-xl bg-white/70 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 shadow-sm hover:shadow-md transition-shadow"
+            className="p-3 rounded-2xl bg-white dark:bg-[#1f1a35] border-2 border-[#1a1530] dark:border-[#f1ecff]/20 text-[#1a1530] dark:text-[#ffd84d] shadow-[3px_3px_0_0_#1a1530] dark:shadow-[3px_3px_0_0_#ffd84d] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0_0_#1a1530] dark:hover:shadow-[2px_2px_0_0_#ffd84d] transition-all"
             aria-label="Toggle theme"
           >
             {prefs.theme === 'dark' ? (
@@ -93,10 +93,11 @@ export default function HomePage() {
 
           <main className="flex-1 min-w-0 space-y-5">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-slate-700 dark:text-slate-200">
+              <h2 className="text-2xl font-black text-[#1a1530] dark:text-[#f1ecff] flex items-center gap-2" style={{ fontFamily: 'Fraunces, serif' }}>
+                <Sparkles className="w-5 h-5 text-[#ff7a59]" />
                 {activeProjectName}
                 {prefs.activeTag && (
-                  <span className="ml-2 text-sm font-normal text-indigo-600 dark:text-indigo-400">
+                  <span className="ml-2 text-sm font-bold text-[#6e56ff] dark:text-[#c9b8ff] bg-[#c9b8ff]/30 dark:bg-[#6e56ff]/30 px-2 py-1 rounded-full">
                     #{prefs.activeTag}
                   </span>
                 )}
@@ -111,7 +112,7 @@ export default function HomePage() {
               today={stats.today}
             />
 
-            <div className="bg-white/60 dark:bg-slate-800/40 backdrop-blur-md border border-white/60 dark:border-slate-700 rounded-2xl shadow-xl p-5 sm:p-6 space-y-5">
+            <div className="bg-white dark:bg-[#1f1a35] border-2 border-[#1a1530] dark:border-[#f1ecff]/20 rounded-3xl shadow-[8px_8px_0_0_#1a1530] dark:shadow-[8px_8px_0_0_#ffd84d] p-5 sm:p-6 space-y-5">
               <TodoInput
                 onAdd={addTodo}
                 projects={projects}
@@ -145,8 +146,8 @@ export default function HomePage() {
               />
             </div>
 
-            <footer className="text-center text-xs text-slate-400 dark:text-slate-500">
-              Double-click to edit · Drag to reorder · Saved to your browser
+            <footer className="text-center text-xs font-medium text-[#1a1530]/50 dark:text-[#f1ecff]/50">
+              Double-click to edit · Drag to reorder · Saved locally · Keep going ✨
             </footer>
           </main>
         </div>
