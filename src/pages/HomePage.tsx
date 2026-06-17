@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Sparkles, Moon, Sun, Zap } from 'lucide-react';
+import { Sparkles, Moon, Sun, Zap, Star } from 'lucide-react';
 import TodoInput from '@/components/TodoInput';
 import TodoList from '@/components/TodoList';
 import FilterBar from '@/components/FilterBar';
@@ -87,6 +87,55 @@ export default function HomePage({ user, onSignOut }: HomePageProps) {
             <UserMenu user={user} onSignOut={onSignOut} />
           </div>
         </header>
+
+        {/* Featured Member Card */}
+        <section className="mb-8">
+          <div className="relative bg-white dark:bg-[#1f1a35] border-2 border-[#1a1530] dark:border-[#f1ecff]/20 rounded-3xl shadow-[8px_8px_0_0_#c9b8ff] dark:shadow-[8px_8px_0_0_#6e56ff] p-5 sm:p-7 overflow-hidden">
+            <div className="absolute top-3 right-3 sm:top-4 sm:right-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ffd84d] text-[#1a1530] text-[10px] sm:text-xs font-black uppercase tracking-widest border-2 border-[#1a1530] shadow-[2px_2px_0_0_#1a1530] rotate-[3deg]">
+              <Star className="w-3 h-3 fill-current" />
+              Featured
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-7">
+              <div className="relative flex-shrink-0">
+                <div className="absolute inset-0 rounded-full bg-[#ff7a59] translate-x-2 translate-y-2" />
+                <div className="absolute inset-0 rounded-full bg-[#ffd84d] -translate-x-2 -translate-y-2" />
+                <img
+                  src="/images/Passport-Photo.jpg"
+                  alt="Featured member"
+                  className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full object-cover border-4 border-[#1a1530] dark:border-[#ffd84d] shadow-[4px_4px_0_0_#1a1530] dark:shadow-[4px_4px_0_0_#ffd84d]"
+                />
+              </div>
+
+              <div className="flex-1 min-w-0 text-center sm:text-left">
+                <div className="text-xs font-black uppercase tracking-widest text-[#6e56ff] dark:text-[#c9b8ff] mb-1">
+                  Doer of the day
+                </div>
+                <h3
+                  className="text-2xl sm:text-3xl font-black text-[#1a1530] dark:text-[#f1ecff] mb-2"
+                  style={{ fontFamily: 'Fraunces, serif' }}
+                >
+                  {user.name}
+                </h3>
+                <p className="text-sm sm:text-base font-medium text-[#1a1530]/70 dark:text-[#f1ecff]/70 leading-relaxed max-w-xl">
+                  Showing up, getting unstuck, and crushing the list one task at a time. Keep that
+                  momentum going — your future self is cheering. ✨
+                </p>
+                <div className="mt-4 flex flex-wrap justify-center sm:justify-start gap-2">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-black bg-[#1a1530] text-[#ffd84d] border-2 border-[#1a1530]">
+                    {stats.completed} done
+                  </span>
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-black bg-[#b8e6c1] text-[#1a1530] border-2 border-[#1a1530]">
+                    {stats.active} active
+                  </span>
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-black bg-[#c9b8ff] text-[#1a1530] border-2 border-[#1a1530]">
+                    {stats.total} total
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <div className="flex flex-col lg:flex-row gap-6">
           <Sidebar
