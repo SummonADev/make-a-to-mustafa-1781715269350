@@ -5,9 +5,16 @@ import TodoList from '@/components/TodoList';
 import FilterBar from '@/components/FilterBar';
 import Sidebar from '@/components/Sidebar';
 import StatsBar from '@/components/StatsBar';
+import UserMenu from '@/components/UserMenu';
 import { useTodos } from '@/hooks/useTodos';
+import type { User } from '@/types';
 
-export default function HomePage() {
+type HomePageProps = {
+  user: User;
+  onSignOut: () => void;
+};
+
+export default function HomePage({ user, onSignOut }: HomePageProps) {
   const {
     todos,
     projects,
@@ -61,21 +68,24 @@ export default function HomePage() {
                 unstuck<span className="text-[#ff7a59]">.</span>
               </h1>
               <p className="text-sm font-medium text-[#1a1530]/60 dark:text-[#f1ecff]/60">
-                Stop overthinking. Start doing.
+                Hey {user.name.split(' ')[0]} — stop overthinking. Start doing.
               </p>
             </div>
           </div>
-          <button
-            onClick={toggleTheme}
-            className="p-3 rounded-2xl bg-white dark:bg-[#1f1a35] border-2 border-[#1a1530] dark:border-[#f1ecff]/20 text-[#1a1530] dark:text-[#ffd84d] shadow-[3px_3px_0_0_#1a1530] dark:shadow-[3px_3px_0_0_#ffd84d] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0_0_#1a1530] dark:hover:shadow-[2px_2px_0_0_#ffd84d] transition-all"
-            aria-label="Toggle theme"
-          >
-            {prefs.theme === 'dark' ? (
-              <Sun className="w-5 h-5" />
-            ) : (
-              <Moon className="w-5 h-5" />
-            )}
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              className="p-3 rounded-2xl bg-white dark:bg-[#1f1a35] border-2 border-[#1a1530] dark:border-[#f1ecff]/20 text-[#1a1530] dark:text-[#ffd84d] shadow-[3px_3px_0_0_#1a1530] dark:shadow-[3px_3px_0_0_#ffd84d] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0_0_#1a1530] dark:hover:shadow-[2px_2px_0_0_#ffd84d] transition-all"
+              aria-label="Toggle theme"
+            >
+              {prefs.theme === 'dark' ? (
+                <Sun className="w-5 h-5" />
+              ) : (
+                <Moon className="w-5 h-5" />
+              )}
+            </button>
+            <UserMenu user={user} onSignOut={onSignOut} />
+          </div>
         </header>
 
         <div className="flex flex-col lg:flex-row gap-6">
