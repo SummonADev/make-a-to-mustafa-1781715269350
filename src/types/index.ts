@@ -35,10 +35,12 @@ export type Project = {
   createdAt: number;
 };
 
+export type AuthProvider = 'google' | 'demo';
+
 export type User = {
   id: string;
   email: string;
   name: string;
   picture: string;
-  provider: 'google';
+  provider: AuthProvider;
 };
