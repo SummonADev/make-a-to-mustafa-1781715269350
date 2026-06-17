@@ -3,6 +3,14 @@ import HomePage from '@/pages/HomePage';
 import SignInScreen from '@/components/SignInScreen';
 import { useAuth } from '@/hooks/useAuth';
 
+const DEMO_USER = {
+  id: 'demo-user',
+  email: 'demo@unstuck.app',
+  name: 'Demo Doer',
+  picture: '/images/Passport-Photo.jpg',
+  provider: 'demo' as const,
+};
+
 export default function App() {
   const { user, ready, scriptLoaded, clientId, renderButton, signOut } = useAuth();
 
@@ -16,7 +24,11 @@ export default function App() {
     );
   }
 
-  if (!user) {
+  // If no Google Client ID is configured, skip the sign-in gate so the preview
+  // is still usable. Users can wire up VITE_GOOGLE_CLIENT_ID to enable real auth.
+  const effectiveUser = user ?? (!clientId ? DEMO_USER : null);
+
+  if (!effectiveUser) {
     return (
       <SignInScreen
         clientId={clientId}
@@ -29,7 +41,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage user={user} onSignOut={signOut} />} />
+        <Route path="/" element={<HomePage user={effectiveUser} onSignOut={signOut} />} />
       </Routes>
     </BrowserRouter>
   );
